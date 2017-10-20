@@ -36,9 +36,8 @@ class Command(BaseCommand):
                 print(y)
                 teste = Coinlist.objects.get(nick=x)
                 teste.price = float(str(json_data['BTC']))
-                oi = float(str(json_data['BTC']))
-                teste.worth = test.ammount * oi
-                # meu sonho é multiplicar o ammount que ta no banco pelo price que eu pego na api
+                new_worth = teste.ammount * teste.price
+                teste.worth = new_worth
                 print(teste.worth)
                 teste.save()
             except:

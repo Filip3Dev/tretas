@@ -6,23 +6,28 @@ class Coinlist(models.Model):
         ('T', 'True'),
         ('F', 'False')
     )
-    """This class represents the bucketlist model."""
-    name = models.CharField(max_length=255, blank=False)
-    nick = models.CharField(max_length=10, blank=False)
-    ammount = models.IntegerField(blank=False)
-    worth = models.DecimalField(max_digits=24, decimal_places=8,default=Decimal('0.00000000'))
-    roi = models.IntegerField(blank=False)
-    logo = models.CharField(max_length=500, blank=False)
-    nodecount = models.IntegerField()
-    coinslocked = models.IntegerField()
-    sharetime = models.TimeField()
+    name = models.CharField("Nome",max_length=255, blank=False)
+    nick = models.CharField("Sigla", max_length=10, blank=False)
+    ammount = models.IntegerField("Quantidade de Moedas", blank=False)
+    worth = models.DecimalField("Valor Total", max_digits=24, decimal_places=8,default=Decimal('0.00000000'))
+    roi = models.IntegerField("ROI", blank=False)
+    logo = models.CharField("Imagem da Moeda", max_length=500, blank=False)
     active = models.CharField(max_length=1, choices=SHIRT_SIZES)
-    price = models.DecimalField(max_digits=24, decimal_places=8,default=Decimal('0.00000000'))
-    mcap = models.CharField(max_length=255)
-    weekcoins = models.DecimalField(max_digits=10, decimal_places=5)
+    price = models.DecimalField("Valor em Bitcoin", max_digits=24, decimal_places=8,default=Decimal('0.00000000'))
+    weekcoins = models.DecimalField("Moedas geradas na semana", max_digits=10, decimal_places=5)
     date_created = models.DateTimeField(auto_now_add=True)
     date_modified = models.DateTimeField(auto_now=True)
 
     def __str__(self):
         return self.nick
+class Details(models.Model):
+    data = models.ForeignKey(Coinlist)
+    nodesconf = models.CharField("node.conf",max_length=855)
+    bootstrap = models.CharField("blockchain",max_length=855)
+    nodecount = models.IntegerField("Quantidade de Nodes", null=False)
+    coinslocked = models.IntegerField("Moedas Travadas", null=False)
+    sharetime = models.TimeField("Tempo entre Shares", null=False)
+    mcap = models.CharField("Link do Marketcap", max_length=255)
+    def __str__(self):
+        return self.data
 # Create your models here.

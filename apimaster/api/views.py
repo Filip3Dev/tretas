@@ -1,19 +1,14 @@
 from django.shortcuts import render
-from rest_framework import generics
-from .serializers import CoinlistSerializer
-from .models import Coinlist
+from rest_framework import viewsets
+from .serializers import CoinlistSerializer, DetailsSerializer
+from .models import Coinlist, Details
 
-class CreateView(generics.ListCreateAPIView):
-    """This class defines the create behavior of our rest api."""
-    queryset = Coinlist.objects.all()
-    serializer_class = CoinlistSerializer
-
-    def perform_create(self, serializer):
-        """Save the post data when creating a new bucketlist."""
-        serializer.save()
-
-class DetailsView(generics.RetrieveUpdateDestroyAPIView):
-    """This class handles the http GET, PUT and DELETE requests."""
+class CoinlistViewSet(viewsets.ModelViewSet):
 
     queryset = Coinlist.objects.all()
     serializer_class = CoinlistSerializer
+
+class DetailsViewSet(viewsets.ModelViewSet):
+
+    queryset = Details.objects.all()
+    serializer_class = DetailsSerializer
