@@ -16,6 +16,12 @@ if not os.path.exists(os.path.join(settings.BASE_DIR, 'logs/task_update.log')):
 handler = logging.FileHandler(os.path.join(settings.BASE_DIR, 'logs/task_cine.log'))
 handler.setLevel(logging.INFO)
 
+# https://www.cryptopia.co.nz/api/GetMarket/ARC_BTC
+# https://bittrex.com/api/v1.1/public/getmarketsummary?market=btc-ltc
+# https://novaexchange.com/remote/v2/market/info/BTC_XZC/
+# https://yobit.net/api/3/ticker/ltc_btc
+# https://c-cex.com/t/dash-btc.json
+
 class Command(BaseCommand):
     help = 'Faz o update dos dados da moeda'
 

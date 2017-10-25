@@ -2,7 +2,6 @@ from rest_framework import serializers
 from .models import Coinlist, Details
 
 
-
 class CoinlistSerializer(serializers.ModelSerializer):
     class Meta:
         model = Coinlist
