@@ -23,6 +23,7 @@ class Coinlist(models.Model):
 
     def __str__(self):
         return self.nick
+
 class Details(models.Model):
     data = models.ForeignKey(Coinlist)
     nodesconf = models.CharField("node.conf",max_length=855)

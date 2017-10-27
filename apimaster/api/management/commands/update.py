@@ -32,19 +32,54 @@ class Command(BaseCommand):
 
     def get_update(self):
         for data in Coinlist.objects.all():
+            x = str(data)
+            print(x)
             try:
-                x = str(data)
-                print(x)
-                r = requests.get('https://min-api.cryptocompare.com/data/price?fsym='+ x +'&tsyms=BTC&e=CCCAGG')
-                json_data = r.json()
-                # print(json_data)
-                y = "%.8f" % float(str(json_data['BTC']))
-                print(y)
                 teste = Coinlist.objects.get(nick=x)
-                teste.price = float(str(json_data['BTC']))
-                new_worth = teste.ammount * teste.price
-                teste.worth = new_worth
-                print(teste.worth)
-                teste.save()
+                exchange = teste.exchange
+                if exchange == "1":
+                    print("Bittrex")
+                    r = requests.get('https://bittrex.com/api/v1.1/public/getmarketsummary?market=btc-'+ x.lower())
+                    json_data = r.json()
+                    price = json_data['result'][0]['Last']
+                    print("%.8f" % price)
+                    teste.price = float(price)
+                    new_worth = teste.ammount * teste.price
+                    teste.worth = new_worth
+                    teste.save()
+                elif exchange == "2":
+                    print("Cryptopia")
+                    r = requests.get('https://www.cryptopia.co.nz/api/GetMarket/'+ x.upper() +'_BTC')
+                    json_data = r.json()
+                    price = json_data['Data']['LastPrice']
+                    print("%.8f" % price)
+                    teste.price = float(price)
+                    new_worth = teste.ammount * teste.price
+                    teste.worth = new_worth
+                    teste.save()
+                elif exchange == "3":
+                    print("Novaexchange")
+                    r = requests.get('https://novaexchange.com/remote/v2/market/info/BTC_'+ x.upper())
+                    json_data = r.json()
+                    price = json_data['markets'][0]['last_price']
+                    print(price)
+                    teste.price = float(price)
+                    new_worth = teste.ammount * teste.price
+                    teste.worth = new_worth
+                    teste.save()
+                elif exchange == "4":
+                    print("Yobit")
+                else:
+                    print("CCex")
+                pass
+                # r = requests.get('https://min-api.cryptocompare.com/data/price?fsym='+ x +'&tsyms=BTC&e=CCCAGG')
+                # json_data = r.json()
+                # print(json_data)
+                # y = "%.8f" % float(str(json_data['BTC']))
+                # print(y)
+                # teste.price = float(str(json_data['BTC']))
+                # new_worth = teste.ammount * teste.price
+                # teste.worth = new_worth
+                # teste.save()
             except:
                 pass

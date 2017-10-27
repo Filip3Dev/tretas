@@ -5,7 +5,7 @@ from .models import Coinlist, Details
 class CoinlistSerializer(serializers.ModelSerializer):
     class Meta:
         model = Coinlist
-        fields = ('id', 'name', 'nick', 'ammount', 'worth', 'roi', 'logo', 'price', 'weekcoins', 'date_created', 'date_modified')
+        fields = ('id', 'name', 'nick', 'ammount', 'worth', 'roi', 'logo', 'price', 'exchange', 'weekcoins', 'date_created', 'date_modified')
         read_only_fields = ('date_created', 'date_modified')
 
 class DetailsSerializer(serializers.ModelSerializer):
