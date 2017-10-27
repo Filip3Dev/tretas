@@ -7,3 +7,4 @@ docker exec nodes sh -c "/var/www/tretas/apimaster/manage.py collectstatic --noi
 docker exec nodes pkill python3.5
 docker exec nodes sh -c "/var/www/tretas/apimaster/manage.py runserver 0.0.0.0:9001"
 # docker exec -d nodes gunicorn --pythonpath /var/www clubsat.wsgi -b 0.0.0.0:8001
+exit 0
