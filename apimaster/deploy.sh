@@ -1,7 +1,7 @@
 #!/bin/bash
 cd sites/apiMaster/apiMaster/tretas
 git pull origin master
-docker exec nodes sh -c "pip3 install -r /var/www/tretas/requirements.txt"
+docker exec nodes sh -c "pip3 install -r /var/www/tretas/requeriments.txt"
 docker exec nodes sh -c "/var/www/tretas/apimaster/manage.py migrate"
 docker exec nodes sh -c "/var/www/tretas/apimaster/manage.py collectstatic --noinput"
 docker exec nodes pkill python3.5
